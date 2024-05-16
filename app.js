@@ -4,6 +4,7 @@ const navigationButtons = document.querySelectorAll(".navigation-btn");
 const allLinks = document.querySelectorAll(".navbar ul li a");
 const body = document.querySelector("body");
 const hambergerBtn = document.querySelector(".hamburger-btn");
+const homaPagesections = document.querySelectorAll('.section-container');
 
 // Function to open the mobile menu when the hamburger button is clicked
 hambergerBtn.addEventListener("click", () => {
@@ -12,7 +13,7 @@ hambergerBtn.addEventListener("click", () => {
   document.querySelector(".navbar-menu-mobile-overlay").style.display = "block";
   document.querySelector("body").classList.add("modal-open");
 });
-// Function to close the mobile men
+// Function to close the mobile menu
 function closeMobileMenu() {
   const mobileMenu = document.querySelector(".navbar-menu-mobile");
   mobileMenu.style.transform = "translateX(-300px)";
@@ -21,11 +22,6 @@ function closeMobileMenu() {
 }
 
 // ---------------Display defferent view functionality-------------
-
-setTimeout(function () {
-  document.getElementById("website-content").style.opacity = "1";
-  document.querySelector(".loader").style.opacity = "0";
-}, 5000);
 
 // Display defferent view and add or remove active class for navbars items
 document
@@ -40,6 +36,21 @@ document
       event.target.classList.add("active");
       showPage(targetPageId);
       scrollToTop();
+    }
+  });
+document
+  .querySelector("#navbar ul.navbar-menu-mobile")
+  .addEventListener("click", (event) => {
+    if (event.target.tagName === "A") {
+      event.preventDefault();
+      allLinks.forEach((link) => {
+        link.classList.remove("active");
+      });
+      const targetPageId = event.target.getAttribute("href").substring(1); // Removing the "#" from the href
+      event.target.classList.add("active");
+      showPage(targetPageId);
+      scrollToTop();
+      closeMobileMenu();
     }
   });
 document
@@ -106,29 +117,16 @@ navigationButtons.forEach((button) =>
   })
 );
 
-function typeWriter(text, i, fnCallback) {
-  if (i < text.length) {
-    document.getElementById("loading-text").innerHTML = text.substring(
-      0,
-      i + 1
-    );
-    setTimeout(function () {
-      typeWriter(text, i + 1, fnCallback);
-    }, 100); // Adjust the speed here (in milliseconds)
-  } else if (typeof fnCallback == "function") {
-    setTimeout(fnCallback, 1000);
-  }
+// --------------- scroll-triggered animation in home-page functionality-------------
+function checkPosition() {
+  homaPagesections.forEach(section => {
+    const position = section.getBoundingClientRect().top;
+    const screenHeight = window.innerHeight;
+    if (position < screenHeight * 0.5) { // Adjust the threshold as needed
+      section.classList.add('active');
+    }
+  });
 }
-
-// Start the typing animation
-//   window.onload = function() {
-//     let text = "";
-//     typeWriter(text, 0, function(){
-//       // Show website content after text animation completes
-//       document.getElementById('website-content').style.opacity = '1';
-//       document.querySelector('.loader').style.opacity = '0';
-//     });
-//   };
 
 // ---------------Toggle theme functionality-------------
 
@@ -138,12 +136,12 @@ const toggleTheme = () => {
   if (body.classList.contains("dark")) {
     body.classList.remove("dark");
     document.querySelector(".toggle-mode").innerHTML =
-      '<span class="material-symbols-outlined">light_mode</span>';
+    '<span class="material-symbols-outlined">dark_mode</span>';
     localStorage.setItem("theme", "light");
   } else {
     body.classList.add("dark");
     document.querySelector(".toggle-mode").innerHTML =
-      '<span class="material-symbols-outlined">dark_mode</span>';
+      '<span class="material-symbols-outlined">light_mode</span>';
     localStorage.setItem("theme", "dark");
   }
 };
@@ -307,4 +305,12 @@ window.onscroll = function () {
   updateToTopBtnVisibility();
   changeNavBarBgFunction();
   updateProgressBar();
+  checkPosition()
 };
+
+
+
+
+
+
+

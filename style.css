@@ -634,6 +634,16 @@ body.modal-open {
   align-items: center;
   justify-content: space-between;
   height: 400px;
+
+  opacity: 0;
+  transform: translateY(50px); /* Initial position off-screen */
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+
+#home-page .section-container.active {
+  opacity: 1;
+  transform: translateY(0); /* Move to original position */
 }
 #home-page .section-container__image {
   flex: 1;
@@ -958,3 +968,5 @@ video {
     height: 50vh;
   }
 }
+
+
