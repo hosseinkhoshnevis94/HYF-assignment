@@ -5,6 +5,38 @@ const allLinks = document.querySelectorAll(".navbar ul li a");
 const body = document.querySelector("body");
 const hambergerBtn = document.querySelector(".hamburger-btn");
 const homaPagesections = document.querySelectorAll('.section-container');
+const navbarMenu = document.querySelector("#navbar ul.navbar-menu");
+const navbarMenuMobile = document.querySelector("#navbar ul.navbar-menu-mobile");
+const homePageButtons = document.querySelector("#home-page .page-container");
+const navBarIcons = document.querySelector('.navbar-icons');
+const preloader = document.querySelector(".preloader-container");
+const websiteContent = document.querySelector("#website-content");
+const slides = document.querySelectorAll(".slide-item");
+const dots = document.querySelectorAll(".dot-item");
+
+//variables
+const themes={
+  'blue':[
+    {key:"--primary-color",value:"#1E0342"},
+    {key:"--secondary-color",value:"#D20062"},
+    {key:"--dark-background-color",value:"#31363F"},
+    {key:"--navbar-scroll-background-color",value:"rgba(30, 3, 66, 0.6)"},
+  ],
+  'red':[
+    {key:"--primary-color",value:"#820300"},
+    {key:"--secondary-color",value:"#5F8670"},
+    {key:"--navbar-scroll-background-color",value:"rgba(130, 3, 0, 0.6)"},
+    ],
+  'orange':[
+    {key:"--primary-color",value:"#fc6736"},
+    {key:"--secondary-color",value:"#0c2d57"},
+    {key:"--dark-background-color",value:"#333"},
+    {key:"--navbar-scroll-background-color",value:"rgba(252, 103, 54, 0.6)"},
+  ],
+}
+let isShowNewsLetterModal = false;
+let currentSlideIndex = 0;
+
 
 // Function to open the mobile menu when the hamburger button is clicked
 hambergerBtn.addEventListener("click", () => {
@@ -20,68 +52,15 @@ function closeMobileMenu() {
   document.querySelector(".navbar-menu-mobile-overlay").style.display = "none";
   document.querySelector("body").classList.remove("modal-open");
 }
+// Function to Displays a preloader, hides website content, and then reveals the content after a delay.
 
-// ---------------Display defferent view functionality-------------
-
-// Display defferent view and add or remove active class for navbars items
-document
-  .querySelector("#navbar ul.navbar-menu")
-  .addEventListener("click", (event) => {
-    if (event.target.tagName === "A") {
-      event.preventDefault();
-      allLinks.forEach((link) => {
-        link.classList.remove("active");
-      });
-      const targetPageId = event.target.getAttribute("href").substring(1); // Removing the "#" from the href
-      event.target.classList.add("active");
-      showPage(targetPageId);
-      scrollToTop();
-    }
-  });
-document
-  .querySelector("#navbar ul.navbar-menu-mobile")
-  .addEventListener("click", (event) => {
-    if (event.target.tagName === "A") {
-      event.preventDefault();
-      allLinks.forEach((link) => {
-        link.classList.remove("active");
-      });
-      const targetPageId = event.target.getAttribute("href").substring(1); // Removing the "#" from the href
-      event.target.classList.add("active");
-      showPage(targetPageId);
-      scrollToTop();
-      closeMobileMenu();
-    }
-  });
-document
-  .querySelector("#navbar ul.navbar-menu-mobile")
-  .addEventListener("click", (event) => {
-    if (event.target.tagName === "A") {
-      event.preventDefault();
-      allLinks.forEach((link) => {
-        link.classList.remove("active");
-      });
-      const targetPageId = event.target.getAttribute("href").substring(1); // Removing the "#" from the href
-      event.target.classList.add("active");
-      showPage(targetPageId);
-      scrollToTop();
-      closeMobileMenu();
-    }
-  });
-// Display defferent view and add or remove active class for navbars items for mobile device
-function displayView(event) {
-  if (event.target.tagName === "A") {
-    event.preventDefault();
-    allLinks.forEach((link) => {
-      link.classList.remove("active");
-    });
-    const targetPageId = event.target.getAttribute("href").substring(1); // Removing the "#" from the href
-    event.target.classList.add("active");
-    showPage(targetPageId);
-    scrollToTop();
-  }
+function showPreloaderAndHideContent(preloader, websiteContent,delay) {
+  setTimeout(function () {
+      preloader.style.display = "none";
+      websiteContent.style.opacity = "1";
+      document.body.style.overflow = "initial";
+  }, delay);
 }
-
 // Function for scroll to the top of the document
 function scrollToTop() {
   window.scrollTo({
@@ -89,6 +68,52 @@ function scrollToTop() {
     behavior: "smooth",
   });
 }
+// ---------------Display defferent view functionality-------------
+
+// Function for Display defferent view and add or remove active class
+function handleNavLinkClick(event, callBack = () => {}) {
+  if (event.target.tagName === "A") {
+    event.preventDefault();
+    const targetLink = event.target;
+    allLinks.forEach((link) => {
+      link.classList.remove("active");
+    });
+    targetLink.classList.add("active");
+    const targetPageId = targetLink.getAttribute("href").substring(1);
+    showPage(targetPageId);
+    scrollToTop();
+    callBack();
+  }
+}
+
+// Attach handleNavLinkClick to the navbar menu to handle navigation link clicks
+navbarMenu.addEventListener("click", (event) => {
+  handleNavLinkClick(event);
+});
+
+// Attach handleNavLinkClick to the navbar mobile-menu to handle navigation link clicks for mobile device
+navbarMenuMobile.addEventListener("click", (event) => {
+  handleNavLinkClick(event, closeMobileMenu);
+});
+
+// Add a click event listener to the home-page buttons to handle navigation
+homePageButtons.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    event.preventDefault();
+    allLinks.forEach((link) => {
+      link.classList.remove("active");
+    });
+    const targetPageId = event.target.dataset.pageid;
+    allLinks.forEach((link) => {
+      if (link.getAttribute("href").substring(1) === targetPageId) {
+        link.classList.add("active");
+      }
+    });
+    showPage(targetPageId);
+    scrollToTop();
+  }
+});
+
 // Function for showing a specific page by adding or removing the 'active' class.
 function showPage(pageId) {
   pages.forEach((page) => {
@@ -99,23 +124,6 @@ function showPage(pageId) {
     }
   });
 }
-// Loop through each navbar items and add a click event listener for changing view
-navigationButtons.forEach((button) =>
-  button.addEventListener("click", (event) => {
-    const targetPageId = event.target.dataset.pageid;
-    const allLinks = document.querySelectorAll(".navbar ul li a");
-    allLinks.forEach((link) => {
-      if (link.getAttribute("href").substring(1) == targetPageId) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
-    showPage(targetPageId);
-    //scroll the page to top
-    scrollToTop();
-  })
-);
 
 // --------------- scroll-triggered animation in home-page functionality-------------
 function checkPosition() {
@@ -128,7 +136,7 @@ function checkPosition() {
   });
 }
 
-// ---------------Toggle theme functionality-------------
+// ---------------Toggle dark-light theme functionality-------------
 
 // Function to toggle theme and save in local storage
 const toggleTheme = () => {
@@ -141,26 +149,61 @@ const toggleTheme = () => {
   } else {
     body.classList.add("dark");
     document.querySelector(".toggle-mode").innerHTML =
-      '<span class="material-symbols-outlined">light_mode</span>';
+    '<span class="material-symbols-outlined">light_mode</span>';
     localStorage.setItem("theme", "dark");
   }
 };
 // Event listener for theme toggle
 document.querySelector(".toggle-mode").addEventListener("click", toggleTheme);
+
 // Check for stored theme preference on page load
-window.addEventListener("load", () => {
+const handleSetThemeOnLoad = () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     toggleTheme();
   }
-});
+};
+
+// ---------------Change color theme functionality-------------
+
+// Apply a theme 
+const applyTheme = (theme) => {
+  if (themes.hasOwnProperty(theme)) {
+    themes[theme].forEach(item => {
+      document.documentElement.style.setProperty(item.key, item.value);
+    });
+    localStorage.setItem('theme-color', theme);
+  }
+};
+// Set the active state for the theme buttons 
+const setActiveThemeButton = (themeColor) => {
+  const allThemeButtons = navBarIcons.querySelectorAll('.theme-btn');
+  allThemeButtons.forEach(button => button.classList.remove('active'));
+  allThemeButtons.forEach(button => {
+    button.dataset.theme === themeColor && button.classList.add('active');
+  });
+};
+
+// Event handler for theme button clicks
+const handleThemeButtonClick = (event) => {
+  if (event.target.classList.contains('theme-btn')) {
+    const theme = event.target.dataset.theme;
+    setActiveThemeButton(theme);
+    applyTheme(theme);
+  }
+};
+// Event handler for window load
+const handleSetColorThemeOnLoad = () => {
+  const themeColor = localStorage.getItem("theme-color");
+  if (themeColor) {
+    setActiveThemeButton(themeColor);
+    applyTheme(themeColor);
+  }
+};
+// Attach event listener for theme button clicks
+navBarIcons.addEventListener('click', handleThemeButtonClick);
 
 // ---------------Slider in home-page functionality-------------
-
-// slider in home page hero-section
-const slides = document.querySelectorAll(".slide-item");
-const dots = document.querySelectorAll(".dot-item");
-let currentSlideIndex = 0;
 
 // Show a specific slide by adding or removing the 'active-slide' class.
 function showSlide(index) {
@@ -199,7 +242,7 @@ dots.forEach((dot, index) => {
   });
 });
 // Automatic slide transition
-// setInterval(nextSlide, 4000);
+setInterval(nextSlide, 2000);
 
 // ---------------Scroll to-top button functionality-------------
 // Function for display/hide the to-top button.
@@ -221,8 +264,7 @@ function changeNavBarBgFunction() {
     document.documentElement.scrollTop > 280
   ) {
     document.querySelector(".navbar").style.backgroundColor =
-      "rgba(252, 103, 54, 0.8)";
-    document.querySelector("a.menu-item").style.color = "black";
+      "var(--navbar-scroll-background-color)";
     document.querySelector(".navbar").style.backdropFilter = "blur(5px)";
   } else {
     document.querySelector(".navbar").style.backgroundColor =
@@ -242,7 +284,6 @@ function updateProgressBar() {
 }
 
 // ---------------Apear newsLetter in home-page functionality-------------
-let isShowNewsLetterModal = false;
 // Function to show newsletter modal when scrolled halfway down the home-page
 function showNewsletterModalOnScroll() {
   if (
@@ -283,22 +324,25 @@ function closeImageModal() {
   modal.style.display = "none";
 }
 
-// Add event listener for keydown event on the window
-window.addEventListener("keydown", () => {
-  closeImageModal();
-  closeNewsLetterModal();
-});
 
 // ---------------Progress-bar in places-page functionality-------------
 function updateProgressBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
+  document.documentElement.scrollHeight -
+  document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 100;
   document.getElementById("progressBar").style.width = scrolled + "%";
 }
 
+
+// Add event listener for keydown event on the window
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+      closeImageModal();
+      closeNewsLetterModal();
+  }
+});
 // Add scroll event listener to the window
 window.onscroll = function () {
   showNewsletterModalOnScroll();
@@ -309,8 +353,11 @@ window.onscroll = function () {
 };
 
 
-
-
-
-
-
+// Call functions when the window is loaded
+window.addEventListener("load",()=>{
+  scrollToTop()
+  handleSetColorThemeOnLoad();
+  handleSetThemeOnLoad()
+  showPreloaderAndHideContent(preloader,websiteContent,500)
+  }
+  )

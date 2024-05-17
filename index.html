@@ -30,6 +30,9 @@
     <title>Netherlands</title>
   </head>
   <body>
+    <div class="preloader-container">
+      <span class="preloader"></span>
+  </div>
     <div id="website-content">
       <button id="toTopBtn" onclick="scrollToTop()">
         <span class="material-symbols-outlined">expand_less</span>
@@ -70,6 +73,9 @@
           onclick="closeMobileMenu()"
         ></div>
         <div class="navbar-icons">
+          <div class="theme-btn" data-theme="blue"></div>
+          <div class="theme-btn" data-theme="red"></div>
+          <div class="theme-btn" data-theme="orange"></div>
           <button class="toggle-mode">
             <span class="material-symbols-outlined">dark_mode</span>
           </button>
@@ -132,7 +138,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <button class="btn btn-primary" data-pageId="place-page">
+              <button class="btn btn-primary moreBtn" data-pageId="places-page">
                 more...
               </button>
             </div>
@@ -144,7 +150,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <button class="btn btn-primary" data-pageId="history-page">
+              <button class="btn btn-primary moreBtn" data-pageId="history-page">
                 more...
               </button>
             </div>
@@ -162,7 +168,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <button class="btn btn-primary" data-pageId="foods-page">
+              <button class="btn btn-primary moreBtn" data-pageId="foods-page">
                 more...
               </button>
             </div>
@@ -174,7 +180,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <button class="btn btn-primary" data-pageId="sports-page">
+              <button class="btn btn-primary moreBtn" data-pageId="sports-page">
                 more...
               </button>
             </div>
@@ -192,7 +198,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
-              <button class="btn btn-primary" data-pageId="festivals-page">
+              <button class="btn btn-primary moreBtn" data-pageId="festivals-page">
                 more...
               </button>
             </div>
@@ -387,13 +393,7 @@
         <header>
           <h1 class="page-banner">History of the Netherlands</h1>
         </header>
-        <video controls autoplay>
-          <source
-            src="https://www.youtube.com/watch?v=TUWqYaEm4h8"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
+        <iframe id="iframeVideo" src="https://player.vimeo.com/video/947149106?h=0f81beacdb"  frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         <article class="page-content">
           <p>
             The history of the Netherlands is characterized by its rich cultural
@@ -875,6 +875,7 @@
             <span class="material-symbols-outlined favorite">favorite</span> by
             Hossein khoshnevis
           </p>
+          <p class="footer-bottom_date">May 2024</p>
         </div>
       </footer>
       <!-- newsletter modal -->
