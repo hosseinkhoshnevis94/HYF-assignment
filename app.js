@@ -25,6 +25,7 @@ const themes={
   'red':[
     {key:"--primary-color",value:"#820300"},
     {key:"--secondary-color",value:"#4E6E81"},
+    {key:"--dark-background-color",value:"#31363F"},
     {key:"--navbar-scroll-background-color",value:"rgba(130, 3, 0, 0.6)"},
     ],
   'orange':[
@@ -242,7 +243,7 @@ dots.forEach((dot, index) => {
   });
 });
 // Automatic slide transition
-setInterval(nextSlide, 2000);
+// setInterval(nextSlide, 5000);
 
 // ---------------Scroll to-top button functionality-------------
 // Function for display/hide the to-top button.
