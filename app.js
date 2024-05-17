@@ -24,7 +24,7 @@ const themes={
   ],
   'red':[
     {key:"--primary-color",value:"#820300"},
-    {key:"--secondary-color",value:"#5F8670"},
+    {key:"--secondary-color",value:"#4E6E81"},
     {key:"--navbar-scroll-background-color",value:"rgba(130, 3, 0, 0.6)"},
     ],
   'orange':[
