@@ -4,40 +4,44 @@ const navigationButtons = document.querySelectorAll(".navigation-btn");
 const allLinks = document.querySelectorAll(".navbar ul li a");
 const body = document.querySelector("body");
 const hambergerBtn = document.querySelector(".hamburger-btn");
-const homaPagesections = document.querySelectorAll('.section-container');
+const homaPagesections = document.querySelectorAll(".section-container");
 const navbarMenu = document.querySelector("#navbar ul.navbar-menu");
-const navbarMenuMobile = document.querySelector("#navbar ul.navbar-menu-mobile");
+const navbarMenuMobile = document.querySelector(
+  "#navbar ul.navbar-menu-mobile"
+);
 const homePageButtons = document.querySelector("#home-page .page-container");
-const navBarIcons = document.querySelector('.navbar-icons');
+const navBarIcons = document.querySelector(".navbar-icons");
 const preloader = document.querySelector(".preloader-container");
 const websiteContent = document.querySelector("#website-content");
 const slides = document.querySelectorAll(".slide-item");
 const dots = document.querySelectorAll(".dot-item");
 
 //variables
-const themes={
-  'blue':[
-    {key:"--primary-color",value:"#1E0342"},
-    {key:"--secondary-color",value:"#D20062"},
-    {key:"--dark-background-color",value:"#31363F"},
-    {key:"--navbar-scroll-background-color",value:"rgba(30, 3, 66, 0.6)"},
+const themes = {
+  blue: [
+    { key: "--primary-color", value: "#1E0342" },
+    { key: "--secondary-color", value: "#D20062" },
+    { key: "--dark-background-color", value: "#31363F" },
+    { key: "--navbar-scroll-background-color", value: "rgba(30, 3, 66, 0.6)" },
   ],
-  'red':[
-    {key:"--primary-color",value:"#820300"},
-    {key:"--secondary-color",value:"#4E6E81"},
-    {key:"--dark-background-color",value:"#31363F"},
-    {key:"--navbar-scroll-background-color",value:"rgba(130, 3, 0, 0.6)"},
-    ],
-  'orange':[
-    {key:"--primary-color",value:"#fc6736"},
-    {key:"--secondary-color",value:"#0c2d57"},
-    {key:"--dark-background-color",value:"#333"},
-    {key:"--navbar-scroll-background-color",value:"rgba(252, 103, 54, 0.6)"},
+  red: [
+    { key: "--primary-color", value: "#820300" },
+    { key: "--secondary-color", value: "#4E6E81" },
+    { key: "--dark-background-color", value: "#31363F" },
+    { key: "--navbar-scroll-background-color", value: "rgba(130, 3, 0, 0.6)" },
   ],
-}
+  orange: [
+    { key: "--primary-color", value: "#fc6736" },
+    { key: "--secondary-color", value: "#0c2d57" },
+    { key: "--dark-background-color", value: "#333" },
+    {
+      key: "--navbar-scroll-background-color",
+      value: "rgba(252, 103, 54, 0.6)",
+    },
+  ],
+};
 let isShowNewsLetterModal = false;
 let currentSlideIndex = 0;
-
 
 // Function to open the mobile menu when the hamburger button is clicked
 hambergerBtn.addEventListener("click", () => {
@@ -55,11 +59,11 @@ function closeMobileMenu() {
 }
 // Function to Displays a preloader, hides website content, and then reveals the content after a delay.
 
-function showPreloaderAndHideContent(preloader, websiteContent,delay) {
+function showPreloaderAndHideContent(preloader, websiteContent, delay) {
   setTimeout(function () {
-      preloader.style.display = "none";
-      websiteContent.style.opacity = "1";
-      document.body.style.overflow = "initial";
+    preloader.style.display = "none";
+    websiteContent.style.opacity = "1";
+    document.body.style.overflow = "initial";
   }, delay);
 }
 // Function for scroll to the top of the document
@@ -128,11 +132,12 @@ function showPage(pageId) {
 
 // --------------- scroll-triggered animation in home-page functionality-------------
 function checkPosition() {
-  homaPagesections.forEach(section => {
+  homaPagesections.forEach((section) => {
     const position = section.getBoundingClientRect().top;
     const screenHeight = window.innerHeight;
-    if (position < screenHeight * 0.5) { // Adjust the threshold as needed
-      section.classList.add('active');
+    if (position < screenHeight * 0.5) {
+      // Adjust the threshold as needed
+      section.classList.add("active");
     }
   });
 }
@@ -140,69 +145,69 @@ function checkPosition() {
 // ---------------Toggle dark-light theme functionality-------------
 
 // Function to toggle theme and save in local storage
-const toggleTheme = () => {
+function toggleTheme() {
   const body = document.body;
   if (body.classList.contains("dark")) {
     body.classList.remove("dark");
     document.querySelector(".toggle-mode").innerHTML =
-    '<span class="material-symbols-outlined">dark_mode</span>';
+      '<span class="material-symbols-outlined">dark_mode</span>';
     localStorage.setItem("theme", "light");
   } else {
     body.classList.add("dark");
     document.querySelector(".toggle-mode").innerHTML =
-    '<span class="material-symbols-outlined">light_mode</span>';
+      '<span class="material-symbols-outlined">light_mode</span>';
     localStorage.setItem("theme", "dark");
   }
-};
+}
 // Event listener for theme toggle
 document.querySelector(".toggle-mode").addEventListener("click", toggleTheme);
 
 // Check for stored theme preference on page load
-const handleSetThemeOnLoad = () => {
+function handleSetThemeOnLoad() {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     toggleTheme();
   }
-};
+}
 
 // ---------------Change color theme functionality-------------
 
-// Apply a theme 
-const applyTheme = (theme) => {
+// Apply a theme
+function applyTheme(theme) {
   if (themes.hasOwnProperty(theme)) {
-    themes[theme].forEach(item => {
+    themes[theme].forEach((item) => {
       document.documentElement.style.setProperty(item.key, item.value);
     });
-    localStorage.setItem('theme-color', theme);
+    localStorage.setItem("theme-color", theme);
   }
-};
-// Set the active state for the theme buttons 
-const setActiveThemeButton = (themeColor) => {
-  const allThemeButtons = navBarIcons.querySelectorAll('.theme-btn');
-  allThemeButtons.forEach(button => button.classList.remove('active'));
-  allThemeButtons.forEach(button => {
-    button.dataset.theme === themeColor && button.classList.add('active');
+}
+// Set the active state for the theme buttons
+function setActiveThemeButton(themeColor) {
+  const allThemeButtons = navBarIcons.querySelectorAll(".theme-btn");
+  allThemeButtons.forEach((button) => button.classList.remove("active"));
+  allThemeButtons.forEach((button) => {
+    button.dataset.theme === themeColor && button.classList.add("active");
   });
-};
+}
 
 // Event handler for theme button clicks
-const handleThemeButtonClick = (event) => {
-  if (event.target.classList.contains('theme-btn')) {
+function handleThemeButtonClick(event) {
+  if (event.target.classList.contains("theme-btn")) {
     const theme = event.target.dataset.theme;
     setActiveThemeButton(theme);
     applyTheme(theme);
   }
-};
+}
 // Event handler for window load
-const handleSetColorThemeOnLoad = () => {
+function handleSetColorThemeOnLoad() {
   const themeColor = localStorage.getItem("theme-color");
   if (themeColor) {
     setActiveThemeButton(themeColor);
     applyTheme(themeColor);
   }
-};
+}
 // Attach event listener for theme button clicks
-navBarIcons.addEventListener('click', handleThemeButtonClick);
+navBarIcons.addEventListener("click", handleThemeButtonClick);
 
 // ---------------Slider in home-page functionality-------------
 
@@ -325,23 +330,21 @@ function closeImageModal() {
   modal.style.display = "none";
 }
 
-
 // ---------------Progress-bar in places-page functionality-------------
 function updateProgressBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height =
-  document.documentElement.scrollHeight -
-  document.documentElement.clientHeight;
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
   var scrolled = (winScroll / height) * 100;
   document.getElementById("progressBar").style.width = scrolled + "%";
 }
 
-
 // Add event listener for keydown event on the window
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-      closeImageModal();
-      closeNewsLetterModal();
+    closeImageModal();
+    closeNewsLetterModal();
   }
 });
 // Add scroll event listener to the window
@@ -350,15 +353,13 @@ window.onscroll = function () {
   updateToTopBtnVisibility();
   changeNavBarBgFunction();
   updateProgressBar();
-  checkPosition()
+  checkPosition();
 };
 
-
 // Call functions when the window is loaded
-window.addEventListener("load",()=>{
-  scrollToTop()
+window.addEventListener("load", () => {
+  scrollToTop();
   handleSetColorThemeOnLoad();
-  handleSetThemeOnLoad()
-  showPreloaderAndHideContent(preloader,websiteContent,500)
-  }
-  )
+  handleSetThemeOnLoad();
+  showPreloaderAndHideContent(preloader, websiteContent, 1000);
+});
