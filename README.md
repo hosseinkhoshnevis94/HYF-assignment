@@ -26,6 +26,8 @@ This project is a responsive, interactive webpage that includes features such as
 - **Image Modal**: Displays images in a larger view when clicked.
 - **Progress Bar**: Shows the scroll progress on the page.
 - **Scroll to Top Button**: A button that appears when the user scrolls down, allowing them to quickly return to the top.
+- **Single Page Display**: Only one page is visible at a time, allowing for multiple views within the same webpage.
+
 
 ## Installation
 
@@ -70,6 +72,7 @@ The JavaScript file includes various functions to handle different aspects of th
 - **Image Modal**: Shows images in a larger view when clicked.
 - **Progress Bar**: Updates the progress bar based on the scroll position.
 - **Scroll-triggered Animations**: Adds animation classes to sections as they come into view.
+- **Single Page Display**: Functionality to display only one page at a time, allowing for multiple views within the same webpage.
 
 ### Event Listeners
 
