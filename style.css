@@ -333,9 +333,10 @@ h6 {
   box-shadow: var(--box-shadow-large);
   transition: all 0.3s;
 }
-
-#toTopBtn:hover {
-  background-color: var(--light-gray-color);
+@media screen and (min-width: 768px) {
+  #toTopBtn:hover {
+    background-color: var(--secondary-color);
+  }
 }
 
 /* Styles for regular buttons */

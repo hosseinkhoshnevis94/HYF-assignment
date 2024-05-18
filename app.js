@@ -43,22 +43,28 @@ const themes = {
 let isShowNewsLetterModal = false;
 let currentSlideIndex = 0;
 
+// --------*****-------Open mobile-menu functionality-------*****------
+
 // Function to open the mobile menu when the hamburger button is clicked
 hambergerBtn.addEventListener("click", () => {
   const mobileMenu = document.querySelector(".navbar-menu-mobile");
   mobileMenu.style.transform = "translateX(0)";
   document.querySelector(".navbar-menu-mobile-overlay").style.display = "block";
+  document.body.style.overflow = "hidden";
   document.querySelector("body").classList.add("modal-open");
 });
 // Function to close the mobile menu
 function closeMobileMenu() {
   const mobileMenu = document.querySelector(".navbar-menu-mobile");
   mobileMenu.style.transform = "translateX(-300px)";
+  document.body.style.overflow = "initial";
   document.querySelector(".navbar-menu-mobile-overlay").style.display = "none";
   document.querySelector("body").classList.remove("modal-open");
 }
-// Function to Displays a preloader, hides website content, and then reveals the content after a delay.
 
+// --------*****-------Pre-loader functionality-------*****------
+
+// Function to Displays a preloader, hides website content, and then reveals the content after a delay.
 function showPreloaderAndHideContent(preloader, websiteContent, delay) {
   setTimeout(function () {
     preloader.style.display = "none";
@@ -73,7 +79,7 @@ function scrollToTop() {
     behavior: "smooth",
   });
 }
-// ---------------Display defferent view functionality-------------
+// --------*****-------Display defferent view functionality-------*****------
 
 // Function for Display defferent view and add or remove active class
 function handleNavLinkClick(event, callBack = () => {}) {
@@ -130,7 +136,7 @@ function showPage(pageId) {
   });
 }
 
-// --------------- scroll-triggered animation in home-page functionality-------------
+// --------*****------- scroll-triggered animation in home-page functionality-------*****------
 function checkPosition() {
   homaPagesections.forEach((section) => {
     const position = section.getBoundingClientRect().top;
@@ -142,7 +148,7 @@ function checkPosition() {
   });
 }
 
-// ---------------Toggle dark-light theme functionality-------------
+// --------*****-------Toggle dark-light theme functionality-------*****------
 
 // Function to toggle theme and save in local storage
 function toggleTheme() {
@@ -170,7 +176,7 @@ function handleSetThemeOnLoad() {
   }
 }
 
-// ---------------Change color theme functionality-------------
+// --------*****-------Change color theme functionality-------*****------
 
 // Apply a theme
 function applyTheme(theme) {
@@ -209,7 +215,7 @@ function handleSetColorThemeOnLoad() {
 // Attach event listener for theme button clicks
 navBarIcons.addEventListener("click", handleThemeButtonClick);
 
-// ---------------Slider in home-page functionality-------------
+// --------*****-------Slider in home-page functionality-------*****------
 
 // Show a specific slide by adding or removing the 'active-slide' class.
 function showSlide(index) {
@@ -250,7 +256,7 @@ dots.forEach((dot, index) => {
 // Automatic slide transition
 setInterval(nextSlide, 5000);
 
-// ---------------Scroll to-top button functionality-------------
+// --------*****-------Scroll to-top button functionality-------*****------
 // Function for display/hide the to-top button.
 function updateToTopBtnVisibility() {
   if (
@@ -263,7 +269,7 @@ function updateToTopBtnVisibility() {
   }
 }
 
-// ---------------Changing navBar background-color functionality-------------
+// --------*****-------Changing navBar background-color functionality-------*****------
 function changeNavBarBgFunction() {
   if (
     document.body.scrollTop > 280 ||
@@ -279,7 +285,7 @@ function changeNavBarBgFunction() {
   }
 }
 
-// ---------------ProgressBar in history-page functionality-------------
+// --------*****-------ProgressBar in history-page functionality-------*****------
 function updateProgressBar() {
   let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   let height =
@@ -289,7 +295,7 @@ function updateProgressBar() {
   document.getElementById("progressBar").style.width = scrolled + "%";
 }
 
-// ---------------Apear newsLetter in home-page functionality-------------
+// --------*****-------Apear newsLetter in home-page functionality-------*****------
 // Function to show newsletter modal when scrolled halfway down the home-page
 function showNewsletterModalOnScroll() {
   if (
@@ -311,7 +317,7 @@ function closeNewsLetterModal() {
   document.getElementById("overlay").style.display = "none";
 }
 
-// ---------------Show images in large scale in places-page functionality-------------
+// --------*****-------Show images in large scale in places-page functionality-------*****------
 // Function to show the image-modal
 function openImageModal(img) {
   let modal = document.getElementById("places-modal");
@@ -330,7 +336,7 @@ function closeImageModal() {
   modal.style.display = "none";
 }
 
-// ---------------Progress-bar in places-page functionality-------------
+// --------*****-------Progress-bar in places-page functionality-------*****------
 function updateProgressBar() {
   var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height =
