@@ -49,7 +49,6 @@ This project is a responsive, interactive webpage that includes features such as
 
 - Navbar
 - Main section Home-page
-- Main section Home-page
 - Main section Place-page
 - Main section History-page
 - Main section Food-page
