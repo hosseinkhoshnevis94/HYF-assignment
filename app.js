@@ -248,7 +248,7 @@ dots.forEach((dot, index) => {
   });
 });
 // Automatic slide transition
-// setInterval(nextSlide, 5000);
+setInterval(nextSlide, 5000);
 
 // ---------------Scroll to-top button functionality-------------
 // Function for display/hide the to-top button.

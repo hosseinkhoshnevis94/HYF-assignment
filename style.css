@@ -216,10 +216,7 @@ h6 {
 }
 
 @media screen and (max-width: 768px) {
-  .theme-btn {
-    height: 12px;
-    width: 12px;
-  }
+
   .navbar-icons div.theme-btn[data-theme="blue"] {
     border-width: 2px;
   }
