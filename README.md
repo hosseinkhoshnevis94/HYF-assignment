@@ -47,16 +47,19 @@ This project is a responsive, interactive webpage that includes features such as
 
 ### HTML Structure
 
-Ensure your HTML structure includes the necessary elements referenced by the JavaScript code, such as:
-
-- Navigation menu
-- Hamburger button
-- Theme buttons
-- Preloader
-- Content sections
-- Slides and dots for the slider
+- Navbar
+- Main section Home-page
+- Main section Home-page
+- Main section Place-page
+- Main section History-page
+- Main section Food-page
+- Main section Festivals-page
+- Main section Contact-page
+- Newsletter
+- Footer
 - Newsletter modal
-- Image modal
+- Modals overlay
+
 
 ### JavaScript Functionality
 
