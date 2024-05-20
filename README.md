@@ -33,12 +33,12 @@ This project is a responsive, interactive webpage that includes features such as
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/hosseinkhoshnevis94/HYF-assignment)
     ```
 
 2. Navigate to the project directory:
     ```bash
-    cd your-repo-name
+    cd [your-repo-name](https://github.com/hosseinkhoshnevis94/HYF-assignment)
     ```
 
 3. Open `index.html` in your preferred web browser to view the webpage.
